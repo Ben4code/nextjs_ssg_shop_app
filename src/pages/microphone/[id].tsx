@@ -2,16 +2,26 @@ import { Microphone } from "../../../interface/MicInterface";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { openDB } from "../../openDB";
 import Link from "next/link";
+import { useRouter } from 'next/router'
+import Button from '@material-ui/core/Button';
+
 
 export type MicDetailProps = Microphone;
 
 export default function MicrophoneDetail({ id, brand, model, price, imageUrl }: MicDetailProps) {
+
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
+
   return <div>
-    <button>
+    <Button variant="contained" color="default">
       <Link href="/">
         <a>Back</a>
       </Link>
-    </button>
+    </Button>
     <div>{id}</div>
     <div>{brand}</div>
     <div>{model}</div>
